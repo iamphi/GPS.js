@@ -707,13 +707,14 @@
     return len;
   };
 
-  GPS.prototype['update'] = function(line) {
+  GPS.prototype['update'] = function(line, extra) {
 
     var parsed = GPS['Parse'](line);
 
     if (parsed === false)
       return false;
 
+    parsed.extra = extra;
     updateState(this['state'], parsed);
 
     this['emit']('data', parsed);
